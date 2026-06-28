@@ -113,13 +113,17 @@ raw -> stg -> mart -> metrics -> Power BI
 
 В проекте отдельно контролируется grain таблиц, чтобы избежать неправильных JOIN-ов и завышения метрик.
 
-| Таблица                     | Grain                                      | Назначение                                           |
-| --------------------------- | ------------------------------------------ | ---------------------------------------------------- |
-| `mart.fct_orders`           | 1 строка = 1 заказ                         | Заказы, выручка, AOV, отмены, customer-level метрики |
-| `mart.fct_order_items`      | 1 строка = 1 товарная позиция              | Категории, товары, продавцы, gross profit, margin    |
-| `mart.fct_customer_value`   | 1 строка = 1 клиент                        | Customer value, repeat customers, сегменты           |
-| `mart.fct_cohort_retention` | 1 строка = 1 cohort month + 1 month number | Cohort retention                                     |
-| `mart.dim_date`             | 1 строка = 1 календарная дата              | Фильтрация по датам в Power BI                       |
+## Ключевые правила grain
+
+В проекте отдельно контролируется grain таблиц, чтобы избежать неправильных JOIN-ов, размножения строк и завышения метрик.
+
+| Таблица | Grain | Назначение |
+|---|---|---|
+| `mart.fct_orders` | 1 строка = 1 заказ | Метрики на уровне заказов: выручка, AOV, отмены, customer-level анализ |
+| `mart.fct_order_items` | 1 строка = 1 товарная позиция | Анализ категорий, товаров, продавцов, gross profit и gross margin |
+| `mart.fct_customer_value` | 1 строка = 1 клиент | Customer value, repeat customers, клиентские сегменты |
+| `mart.fct_cohort_retention` | 1 строка = 1 cohort month + 1 month number | Monthly cohort retention |
+| `mart.dim_date` | 1 строка = 1 календарная дата | Фильтрация по датам в Power BI |
 
 ## Важные ограничения JOIN-ов
 
@@ -365,7 +369,7 @@ us-ecommerce-analytics-mart/
 │   └── data_model.md
 │
 ├── powerbi/
-│   └── us_ecommerce_analytics_dashboard.pbix
+│   └── README.md
 │
 └── screenshots/
     ├── 01_executive_overview.png
@@ -398,13 +402,8 @@ CREATE SCHEMA mart;
 06_metrics_queries.sql
 ```
 
-5. Открыть Power BI файл:
-
-```text
-powerbi/us_ecommerce_analytics_dashboard.pbix
-```
-
-6. При необходимости обновить подключение к PostgreSQL.
+5. Файл Power BI `.pbix` не включён в репозиторий, потому что превышает лимит GitHub 100 MB.
+6. Скриншоты дашборда доступны в папке `screenshots/`.
 
 ## Примечания
 

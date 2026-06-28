@@ -81,13 +81,13 @@ The `mart` schema contains analytical fact and dimension views:
 
 The project explicitly controls table grain to avoid incorrect joins and duplicated metrics.
 
-| Table                       | Grain                                   | Main Purpose                                            |
-| --------------------------- | --------------------------------------- | ------------------------------------------------------- |
-| `mart.fct_orders`           | 1 row = 1 order                         | Order-level metrics, revenue, AOV, cancellation rate    |
-| `mart.fct_order_items`      | 1 row = 1 order item                    | Category, product, seller and gross profit analysis     |
-| `mart.fct_customer_value`   | 1 row = 1 customer                      | Customer value, repeat customers, customer segmentation |
-| `mart.fct_cohort_retention` | 1 row = 1 cohort month + 1 month number | Monthly cohort retention                                |
-| `mart.dim_date`             | 1 row = 1 calendar date                 | Date filtering in Power BI                              |
+| Table | Grain | Main Purpose |
+|---|---|---|
+| `mart.fct_orders` | 1 row = 1 order | Order-level metrics, revenue, AOV, cancellation rate |
+| `mart.fct_order_items` | 1 row = 1 order item | Category, product, seller and gross profit analysis |
+| `mart.fct_customer_value` | 1 row = 1 customer | Customer value, repeat customers, customer segmentation |
+| `mart.fct_cohort_retention` | 1 row = 1 cohort month + 1 month number | Monthly cohort retention |
+| `mart.dim_date` | 1 row = 1 calendar date | Date filtering in Power BI |
 
 ## Key Metrics
 
@@ -231,7 +231,7 @@ us-ecommerce-analytics-mart/
 │   └── data_model.md
 │
 ├── powerbi/
-│   └── us_ecommerce_analytics_dashboard.pbix
+│   └── README.md
 │
 └── screenshots/
     ├── 01_executive_overview.png
@@ -259,11 +259,9 @@ us-ecommerce-analytics-mart/
 
 5. Open the Power BI file:
 
-```text
-powerbi/us_ecommerce_analytics_dashboard.pbix
-```
+The Power BI `.pbix` file is not included because it exceeds GitHub's 100 MB file size limit.
 
-6. Refresh the model connection if needed.
+6. Dashboard screenshots are available in the `screenshots/` folder.
 
 ## Notes
 
