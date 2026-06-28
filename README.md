@@ -12,6 +12,15 @@ The project follows a layered analytical architecture:
 ```text
 raw -> stg -> mart -> metrics -> Power BI
 ```
+## Dataset Source
+
+The dataset used in this project is publicly available on Kaggle:
+
+[E-Commerce U.S Dataset (2019~2025, 1 Million rows)](https://www.kaggle.com/datasets/limjeongeun/synthetic-u-s-e-commerce-dataset-1m-orders)
+
+Dataset author: Jeongeun Lim.
+
+The dataset is synthetic and was used for educational and portfolio purposes, including SQL modeling, BI dashboard development, revenue analysis, customer analytics and cohort retention analysis.
 
 ## Business Questions
 
@@ -265,7 +274,25 @@ The Power BI `.pbix` file is not included because it exceeds GitHub's 100 MB fil
 
 ## Notes
 
-The raw dataset is not included in this repository due to file size. The project focuses on SQL modeling, metric logic, analytical marts and dashboard design.
+The Power BI `.pbix` file is not included because it exceeds GitHub's 100 MB file size limit. Dashboard screenshots are available in the `screenshots/` folder.
+
+## Key Design Decisions
+
+- I separated `mart.fct_orders` and `mart.fct_order_items` because they have different grain: order-level and item-level.
+- I aggregated `order_items` to `order_id` before joining it to the order-level mart to avoid row multiplication.
+- I aggregated `order_payments` to `order_id` because one order can have multiple payment rows.
+- I used only delivered orders for revenue metrics, while canceled orders were used for cancellation analysis.
+- I used `customer_unique_id` for customer analytics and retention because `customer_id` is unique per order/customer record and does not represent repeat behavior correctly.
+- I limited the retention dashboard to the first 12 months because the full 83-month cohort matrix is not readable in Power BI.
+- I prepared geolocation data at the staging layer but kept regional analytics as a future improvement to keep the first dashboard focused on revenue, category, customer and retention analysis.
+
+## Challenges
+
+- Raw geolocation data had multiple rows per `zip_code_prefix`, so it could not be joined directly without aggregation.
+- Raw payments had multiple rows per order, which required order-level aggregation before joining.
+- Cohort retention required changing the intermediate grain from order-level to customer-month level.
+- The full retention matrix had more than 80 month columns, so the dashboard was limited to the first 12 months for readability.
+- The Power BI `.pbix` file exceeded GitHub's 100 MB file size limit, so only screenshots and documentation are included in the repository.
 
 ## Future Improvements
 
