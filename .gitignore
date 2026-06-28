@@ -1,0 +1,23 @@
+# Raw data files
+data/
+*.csv
+
+# Local database / temporary files
+*.db
+*.sqlite
+
+# Power BI files
+*.pbix
+*.tmp
+*.bak
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment files
+.env
